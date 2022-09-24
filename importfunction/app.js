@@ -2,14 +2,12 @@
 
 const AWS = require('aws-sdk')
 AWS.config.region = process.env.AWS_REGION || 'eu-central-1'
+
 const s3 = new AWS.S3()
 
 const docClient = new AWS.DynamoDB.DocumentClient()
 
-//const { v4: uuidv4 } = require('uuid') //breaking change
-//const {"v4": uuidv4} = require('uuid')
-
-const ddbTable = process.env.DDBtable || 'quote-json-data';
+const ddbTable = process.env.DDBtable
 
 // The Lambda handler
 exports.handler = async (event) => {

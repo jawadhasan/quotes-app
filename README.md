@@ -13,9 +13,6 @@ A simple application utilizaing basic AWS Services
 aws s3 mb s3://quoteapp-artifacts-sam
 
 
-## create bucket for Quotes json file
-aws s3 mb s3://quote-json-data
-
 ## SAM package
 aws cloudformation package `
 --template-file sam-template.yaml `

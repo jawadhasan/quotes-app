@@ -18,9 +18,9 @@ Resources:
   ImportJsonFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://quoteapp-artifacts-sam/85188738f6f90da93273df12e3e22b91
+      CodeUri: s3://quoteapp-artifacts-sam/005aff80c03224916e148d492a2c195b
       Handler: app.handler
-      Runtime: nodejs12.x
+      Runtime: nodejs16.x
       Timeout: 60
       Environment:
         Variables:
@@ -41,3 +41,37 @@ Resources:
             Bucket:
               Ref: InputS3Bucket
             Events: s3:ObjectCreated:*
+  QuoteApiFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Runtime: nodejs16.x
+      Handler: index.handler
+      Environment:
+        Variables:
+          TABLE_NAME:
+            Ref: InputBucketName
+      Policies: AmazonDynamoDBFullAccess
+      CodeUri: s3://quoteapp-artifacts-sam/db76b613612ce0001920ccce341fd686
+      Events:
+        MyApiResource:
+          Type: Api
+          Properties:
+            Path: /quotes
+            Method: get
+Outputs:
+  HelloWorldApi:
+    Description: API Gateway endpoint URL for Prod stage for quote function
+    Value:
+      Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/quotes/
+  QuoteApiFunction:
+    Description: QuoteApiFunction ARN
+    Value:
+      Fn::GetAtt:
+      - QuoteApiFunction
+      - Arn
+  QuoteApiFunctionIamRole:
+    Description: Implicit IAM Role created for QuoteApiFunction
+    Value:
+      Fn::GetAtt:
+      - QuoteApiFunction
+      - Arn
