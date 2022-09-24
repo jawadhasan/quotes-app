@@ -38,3 +38,5 @@ aws cloudformation create-stack  `
 ## Build and Deploy
 npm run build from web folder
 ..>dist folder
+
+aws s3 sync . s3://quoteapp.awsclouddemos.com --acl public-read
