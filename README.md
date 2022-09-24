@@ -35,6 +35,9 @@ aws cloudformation create-stack  `
  --stack-name quoteapp-web  `
  --template-body file://demo-s3.yaml
 
+## Cloud Formation - Delete Static Website
+aws cloudformation delete-stack --stack-name quoteapp-web
+
 ## Build and Deploy
 npm run build from web folder
 ..>dist folder
