@@ -9,10 +9,26 @@ A simple application utilizaing basic AWS Services
 - S3 static website
 - API for quotes data from dynamodb to display on website.
 
+## create bucket for App artifacts
+aws s3 mb s3://quoteapp-artifacts-sam
 
 
+## create bucket for Quotes json file
+aws s3 mb s3://quote-json-data
 
+## SAM package
+aws cloudformation package `
+--template-file sam-template.yaml `
+--s3-bucket quoteapp-artifacts-sam `
+--output-template-file sam-output-template.yaml
 
+## SAM Deploy
+aws cloudformation deploy `
+--template-file sam-output-template.yaml `
+--stack-name quoteapp-sam `
+--capabilities CAPABILITY_IAM
 
-
+## SAM Delete
+aws cloudformation delete-stack `
+--stack-name quoteapp-sam
 

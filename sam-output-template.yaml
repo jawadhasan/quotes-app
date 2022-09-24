@@ -1,0 +1,43 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Parameters:
+  InputBucketName:
+    Type: String
+    Default: quote-json-data
+Resources:
+  DDBtable:
+    Type: AWS::Serverless::SimpleTable
+    Properties:
+      TableName:
+        Ref: InputBucketName
+  InputS3Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName:
+        Ref: InputBucketName
+  ImportJsonFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: s3://quoteapp-artifacts-sam/85188738f6f90da93273df12e3e22b91
+      Handler: app.handler
+      Runtime: nodejs12.x
+      Timeout: 60
+      Environment:
+        Variables:
+          DDBtable:
+            Ref: DDBtable
+      Policies:
+      - AWSLambdaExecute
+      - DynamoDBCrudPolicy:
+          TableName:
+            Ref: InputBucketName
+      - S3CrudPolicy:
+          BucketName:
+            Ref: InputBucketName
+      Events:
+        ImportJsonFunctionEvent:
+          Type: S3
+          Properties:
+            Bucket:
+              Ref: InputS3Bucket
+            Events: s3:ObjectCreated:*
