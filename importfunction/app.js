@@ -62,19 +62,22 @@ const ddbLoader = async (data) => {
       }
       params.RequestItems[ddbTable] = []
   
+      let pkVal = 1;
+
       item_data.forEach(item => {
         for (let key of Object.keys(item)) {
           // An AttributeValue may not contain an empty string
           if (item[key] === '') 
             delete item[key]
         }
-       // uuidv4(),
-       
+    
+       //id:  AWS.util.uuid.v4(),
+       pkVal = pkVal+1; //manually setting up PK in incrementing fashion in a basic way.
         // Build params
         params.RequestItems[ddbTable].push({
           PutRequest: {
             Item: {
-              id:  AWS.util.uuid.v4(),
+              id:  pkVal.toString(),
               ...item
             }
           }

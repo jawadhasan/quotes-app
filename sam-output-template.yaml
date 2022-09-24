@@ -18,7 +18,7 @@ Resources:
   ImportJsonFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://quoteapp-artifacts-sam/005aff80c03224916e148d492a2c195b
+      CodeUri: s3://quoteapp-artifacts-sam/986683e9e2617cc6ee7606ac4e3b79a0
       Handler: app.handler
       Runtime: nodejs16.x
       Timeout: 60
