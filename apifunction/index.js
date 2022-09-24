@@ -1,13 +1,17 @@
+const QuoteService = require(`./quote-service`);
+
 exports.handler = async (event) => {
-    // TODO implement
+   
     
     var token = makeid(5)
     console.log(token);
     console.log("...");
 
+    var rQuote = await getRandomCode();
+   
 	const response = {
         statusCode: 200,
-        body: JSON.stringify(token),
+        body: JSON.stringify(rQuote),
     };
     return response;  
 
@@ -22,4 +26,18 @@ function makeid(length) {
  charactersLength));
    }
    return result;
+}
+
+async function getRandomCode(){
+  let totalQuotes = '5000';// hard-coded value for now
+
+  //use random number to get quote.
+  var theRandomNumber = Math.floor(Math.random() * totalQuotes) + 1;
+  console.log(`theRandomNumber: ${theRandomNumber}`); 
+
+  const data = await QuoteService.findByID(theRandomNumber.toString());
+
+  console.log(`randomQuote: ${data}`);
+
+  return data;
 }

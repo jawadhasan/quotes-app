@@ -31,6 +31,14 @@ exports.handler = async (event) => {
         await ddbLoader(jsonData)
        
 
+        //delete JSON file
+        const deleteParams = {
+          Bucket: event.Records[0].s3.bucket.name,
+          Key: event.Records[0].s3.object.key
+        }
+
+        await deleteJsonFile(deleteParams);
+
       } catch (err) {
         console.error(err)
       }
@@ -51,7 +59,7 @@ const ddbLoader = async (data) => {
   console.log(`Total batches: ${batches.length}`)
 
   let batchCount = 0
-
+  let pkVal = 1;
   // Save each batch
   await Promise.all(
     batches.map(async (item_data) => {
@@ -62,7 +70,7 @@ const ddbLoader = async (data) => {
       }
       params.RequestItems[ddbTable] = []
   
-      let pkVal = 1;
+     
 
       item_data.forEach(item => {
         for (let key of Object.keys(item)) {
@@ -71,7 +79,7 @@ const ddbLoader = async (data) => {
             delete item[key]
         }
     
-       //id:  AWS.util.uuid.v4(),
+       //id:  AWS.util.uuid.v4(), use this one, if UUID is needed for pk
        pkVal = pkVal+1; //manually setting up PK in incrementing fashion in a basic way.
         // Build params
         params.RequestItems[ddbTable].push({
@@ -95,4 +103,10 @@ const ddbLoader = async (data) => {
       }
     })
   )
+}
+
+
+const deleteJsonFile = async(params)=>{
+  await s3.deleteObject(params).promise()
+  console.log(`${params.Key} file deleted Successfully`)
 }

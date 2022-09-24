@@ -18,7 +18,7 @@ Resources:
   ImportJsonFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://quoteapp-artifacts-sam/986683e9e2617cc6ee7606ac4e3b79a0
+      CodeUri: s3://quoteapp-artifacts-sam/12af83fce7c01e41d6ef90e71f81e96f
       Handler: app.handler
       Runtime: nodejs16.x
       Timeout: 60
@@ -51,7 +51,7 @@ Resources:
           TABLE_NAME:
             Ref: InputBucketName
       Policies: AmazonDynamoDBFullAccess
-      CodeUri: s3://quoteapp-artifacts-sam/db76b613612ce0001920ccce341fd686
+      CodeUri: s3://quoteapp-artifacts-sam/d836c7c182ee77a306e9f138876d7c5e
       Events:
         MyApiResource:
           Type: Api
