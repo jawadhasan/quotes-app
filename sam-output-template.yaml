@@ -51,13 +51,19 @@ Resources:
           TABLE_NAME:
             Ref: InputBucketName
       Policies: AmazonDynamoDBFullAccess
-      CodeUri: s3://quoteapp-artifacts-sam/d836c7c182ee77a306e9f138876d7c5e
+      CodeUri: s3://quoteapp-artifacts-sam/f6025b38bb4c00aedeeb46f994a4e034
       Events:
         MyApiResource:
           Type: Api
           Properties:
             Path: /quotes
             Method: get
+Globals:
+  Api:
+    Cors:
+      AllowMethods: "'GET,POST,OPTIONS'"
+      AllowHeaders: "'content-type'"
+      AllowOrigin: "'*'"
 Outputs:
   HelloWorldApi:
     Description: API Gateway endpoint URL for Prod stage for quote function

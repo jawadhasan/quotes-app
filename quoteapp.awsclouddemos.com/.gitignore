@@ -11,8 +11,7 @@
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
-.cache
-dist
+.cache/
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/
@@ -27,16 +26,17 @@ Bin/
 obj/
 Obj/
 
+dist/
+*.cache/
+
 .vscode/
 wwwroot/
-
-node_modules
 
 # Visual Studio 2015 cache/options directory
 .vs/
 /wwwroot/dist/
 /ClientApp/dist/
-
+node_modules/
 # MSTest test Results
 [Tt]est[Rr]esult*/
 [Bb]uild[Ll]og.*
