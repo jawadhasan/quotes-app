@@ -6,7 +6,7 @@ A simple application utilizaing basic AWS Services
 - S3 events when new file is uploaded
 - AWS Lambda for file processing
 - DynamoDB for persistence
-- S3 static website
+- S3 static website (quoteapp.awsclouddemos.com)
 - API for quotes data from dynamodb to display on website.
 
 ## create bucket for App artifacts
@@ -29,3 +29,12 @@ aws cloudformation deploy `
 aws cloudformation delete-stack `
 --stack-name quoteapp-sam
 
+
+## Cloudformation - Static Website
+aws cloudformation create-stack  `
+ --stack-name quoteapp-web  `
+ --template-body file://demo-s3.yaml
+
+## Build and Deploy
+npm run build from web folder
+..>dist folder
