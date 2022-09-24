@@ -24,8 +24,8 @@
     <section class="hero py-3 flex-grow-1">
       <div class="container py-4">
         <div class="row">
-          <div class="col-lg-12" data-bind="with: selectedQuote">
-            <h2 class="display-4" data-bind="text:quoteText"></h2>
+          <div class="col-lg-12" data-bind="with: selectedQuote">           
+            <h2 data-bind="text:quoteText"></h2>
             <footer data-bind="text:'-'+quoteAuthor"></footer>
           </div>
         </div>
@@ -33,14 +33,12 @@
     </section>
   </div>
 
-
-  <div class="py-3">
     <div class="container py-4">
       <button id="btnRefresh" class="btn btn-primary">Refresh</button>
       <a class="text-primary" href="https://awsclouddemos.com/" target="_blank">awsclouddemos.com</a> | 
       <a class="text-primary" href="https://hexquote.com/" target="_blank"> hexquote.com</a>
     </div>
-  </div>
+  
 
   <!-- App Code -->
   <script src="./index.js"></script>
