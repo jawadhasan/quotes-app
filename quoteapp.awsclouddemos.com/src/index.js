@@ -31,7 +31,7 @@ var demoApp = function () {
  
    function getRandomQuote(){
 
-     makeAjaxRequest('GET', "https://dpulxf8ib9.execute-api.eu-central-1.amazonaws.com/Prod/quotes/", null)
+     makeAjaxRequest('GET', "https://khoh3zvc0c.execute-api.eu-central-1.amazonaws.com/Prod/quotes/", null)
             .done(function (data) {
                 console.log(data);
                 selectedQuote(data);
