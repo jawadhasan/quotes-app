@@ -14,23 +14,22 @@ A simple application utilizaing basic AWS Services
 https://hexquote.com/building-an-aws-serverless-web-application/    
 
 ## Create bucket for App artifacts
-`aws s3 mb s3://quoteapp-artifacts-sam`    
+`aws s3 mb s3://quoteapp-artifacts-sam`
 
 ## SAM package
-```aws cloudformation package `
+aws cloudformation package `
 --template-file sam-template.yaml `
 --s3-bucket quoteapp-artifacts-sam `
---output-template-file sam-output-template.yaml```
+--output-template-file sam-output-template.yaml
 
 ## SAM Deploy
-```aws cloudformation deploy `
+aws cloudformation deploy `
 --template-file sam-output-template.yaml `
 --stack-name quoteapp-sam `
---capabilities CAPABILITY_IAM```
+--capabilities CAPABILITY_IAM
 
 ## SAM Delete
 `aws cloudformation delete-stack --stack-name quoteapp-sam`
-
 
 ## Cloudformation - Static Website
 aws cloudformation create-stack  `
